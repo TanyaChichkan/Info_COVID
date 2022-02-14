@@ -4,13 +4,20 @@ import { constantsText } from '../../constants/constants';
 import Loader from '../info_components/Loader';
 import Error from '../info_components/Error';
 import Header from '../structure_components/Header';
-import Section from '../structure_components/Section';
-import Container from '../structure_components/Container';
+import Section from '../assets_components/Section';
+import Container from '../assets_components/Container';
+import Table from './Table';
+import ModalComponent from '../assets_components/ModalComponent';
+import List from '../assets_components/List';
 
 const InfoTracker = () => {
   const {
     loadingInfo: { isLoading, error, success },
+    modalOpen,
+    setModalOpen,
   } = useContext(InfoContext);
+
+  const handleCloseModal = () => setModalOpen(false);
 
   return (
     <>
@@ -22,10 +29,18 @@ const InfoTracker = () => {
           <Header />
           <main>
             <Container>
-              <Section></Section>
+              <Section>
+                <Table />
+              </Section>
             </Container>
           </main>
         </>
+      )}
+
+      {modalOpen && (
+        <ModalComponent openModal={modalOpen} closeModal={handleCloseModal}>
+          <List />
+        </ModalComponent>
       )}
     </>
   );

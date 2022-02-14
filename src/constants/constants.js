@@ -8,6 +8,7 @@ export const constantsText = {
   success: 'SUCCESS',
   error: 'ERROR',
   loading: 'LOADING',
+  inputPlaceholder: 'Search...'
 };
 
 export const constantsNumbers = {
