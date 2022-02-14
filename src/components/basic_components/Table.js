@@ -79,7 +79,10 @@ const Table = () => {
   const { countriesInfo, getSelectedCountry } = useContext(InfoContext);
   const { setModalOpen } = useContext(ModalContext);
 
-  const [sortedField, setSortedField] = useState([null, null]);
+  const [sortedField, setSortedField] = useState({
+    order: false,
+    field: '',
+  });
   const [sortedCountryData, setSortedCountryData] = useState(countriesInfo);
 
   const onHandleClick = (e) => {
@@ -94,25 +97,43 @@ const Table = () => {
   );
 
   const handleSortClick = (e) => {
-    setSortedField(e.currentTarget.dataset.name);
-    console.log(sortDataByName());
-    setSortedCountryData(sortDataByName());
+    console.log(e.target);
+    const { nodeName } = e.target;
+    if (
+      nodeName === 'TH' ||
+      nodeName === 'SVG' ||
+      nodeName === 'USE' ||
+      nodeName === 'SPAN'
+    ) {
+      setSortedField((prev) => ({
+        field: e.target.dataset.name,
+        order: !prev.order,
+      }));
+    }
   };
 
-  const sortDataByName = () => {
-    return [...countriesInfo].sort((a, b) => {
-      const fa = a.Country.toLowerCase();
-      const fb = b.Country.toLowerCase();
+  useEffect(() => {
+    console.log(1);
+    const { field, order } = sortedField;
 
-      if (fa > fb) {
-        return -1;
-      }
-      if (fa < fb) {
-        return 1;
-      }
+    const sortedArray = [...countriesInfo].sort((itemCurrent, itemNext) => {
+      const a =
+        typeof itemCurrent[field] === 'string'
+          ? itemCurrent[field].toLowerCase()
+          : itemCurrent[field];
+      const b =
+        typeof itemNext[field] === 'string'
+          ? itemNext[field].toLowerCase()
+          : itemNext[field];
+
+      if (a < b) return order ? 1 : -1;
+      if (a > b) return !order ? 1 : -1;
+
       return 0;
     });
-  };
+
+    setSortedCountryData(sortedArray);
+  }, [countriesInfo, sortedField]);
 
   const totalCasesFormatted = formatNumbersToStrings(totalCases);
 
@@ -120,25 +141,24 @@ const Table = () => {
     <TableStyled>
       <thead>
         <TableRowStyled>
-          <TableHeaderStyled>
-            №
-            <span onClick={handleSortClick} data-name='number'>
-              <svg fill='white' width={10} height={10}>
-                <use href={sprite + `#icon-arrow-up2`} />
-              </svg>
-            </span>
-          </TableHeaderStyled>
-          <TableHeaderStyled>
+          <TableHeaderStyled>№</TableHeaderStyled>
+          <TableHeaderStyled onClick={handleSortClick} data-name='Country'>
             Country
-            <span onClick={handleSortClick} data-name='country'>
-              <svg fill='white' width={10} height={10}>
-                <use href={sprite + `#icon-arrow-up2`} />
-              </svg>
+            <span>
+              {sortedField.order ? (
+                <svg fill='white' width={10} height={10}>
+                  <use href={sprite + `#icon-arrow-up2`} />
+                </svg>
+              ) : (
+                <svg fill='white' width={10} height={10}>
+                  <use href={sprite + `#icon-arrow-down2`} />
+                </svg>
+              )}
             </span>
           </TableHeaderStyled>
           <TableHeaderStyled>
             Total Confirmed
-            <span onClick={handleSortClick} data-name='total'>
+            <span onClick={handleSortClick} data-name='TotalConfirmed'>
               <svg fill='white' width={10} height={10}>
                 <use href={sprite + `#icon-arrow-up2`} />
               </svg>
