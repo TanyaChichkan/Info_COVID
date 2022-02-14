@@ -2,12 +2,13 @@ import { useContext } from 'react';
 import styled from 'styled-components';
 import { InfoContext } from '../../context/InfoContext';
 import Wrapper from './Wrapper';
+import { formatNumbersToStrings } from '../helpers/helperFns';
 
 import { ReactComponent as ConfirmedSVG } from '../../images/icons/confirmed.svg';
 import { ReactComponent as DeathsSVG } from '../../images/icons/deaths.svg';
 import { ReactComponent as RecoveredSVG } from '../../images/icons/recovered.svg';
 
-//styles for modal heading
+//styles for modal content
 const HeadingStyled = styled.h3`
   font-size: max(2.5vw, 30px);
   font-weight: 700;
@@ -48,6 +49,7 @@ const List = () => {
   const { selectedCountry } = useContext(InfoContext);
   const { TotalConfirmed, TotalDeaths, TotalRecovered } = selectedCountry;
 
+  //a new obj with 3 type of numbers for a list
   const selectedCountryDataForList = {
     TotalConfirmed,
     TotalDeaths,
@@ -69,7 +71,7 @@ const List = () => {
                   {key.slice(0, 5) + ' ' + key.slice(5)}
                 </SpanTextStyled>
               </Wrapper>
-              <SpanTextStyled>{value}</SpanTextStyled>
+              <SpanTextStyled>{formatNumbersToStrings(value)}</SpanTextStyled>
             </ListItemStyled>
           )
         )}

@@ -10,7 +10,6 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: '31.3vw',
   minWidth: '300px',
-  height: '400px',
   bgcolor: 'background.paper',
   borderRadius: '20px',
   boxShadow: 24,

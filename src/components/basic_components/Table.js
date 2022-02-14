@@ -1,7 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { InfoContext } from '../../context/InfoContext';
+import { ModalContext } from '../../context/ModalContext';
 import { device } from '../../styles/queries';
+import { formatNumbersToStrings } from '../helpers/helperFns';
+import sprite from '../../images/icons/sprite.svg';
 
 //mixins for the styles
 const borderRadius = css`
@@ -73,8 +76,11 @@ const TableFooterStyled = styled.tfoot`
 `;
 
 const Table = () => {
-  const { countriesInfo, getSelectedCountry, setModalOpen } =
-    useContext(InfoContext);
+  const { countriesInfo, getSelectedCountry } = useContext(InfoContext);
+  const { setModalOpen } = useContext(ModalContext);
+
+  const [sortedField, setSortedField] = useState([null, null]);
+  const [sortedCountryData, setSortedCountryData] = useState(countriesInfo);
 
   const onHandleClick = (e) => {
     const countryCode = e.currentTarget.dataset.code;
@@ -82,14 +88,31 @@ const Table = () => {
     setModalOpen(true);
   };
 
-  const formatNumbersToStrings = (number) => {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-  };
-
   const totalCases = countriesInfo.reduce(
     (acc, country) => acc + country.TotalConfirmed,
     0
   );
+
+  const handleSortClick = (e) => {
+    setSortedField(e.currentTarget.dataset.name);
+    console.log(sortDataByName());
+    setSortedCountryData(sortDataByName());
+  };
+
+  const sortDataByName = () => {
+    return [...countriesInfo].sort((a, b) => {
+      const fa = a.Country.toLowerCase();
+      const fb = b.Country.toLowerCase();
+
+      if (fa > fb) {
+        return -1;
+      }
+      if (fa < fb) {
+        return 1;
+      }
+      return 0;
+    });
+  };
 
   const totalCasesFormatted = formatNumbersToStrings(totalCases);
 
@@ -97,13 +120,34 @@ const Table = () => {
     <TableStyled>
       <thead>
         <TableRowStyled>
-          <TableHeaderStyled>№</TableHeaderStyled>
-          <TableHeaderStyled>Country</TableHeaderStyled>
-          <TableHeaderStyled>Total Confirmed</TableHeaderStyled>
+          <TableHeaderStyled>
+            №
+            <span onClick={handleSortClick} data-name='number'>
+              <svg fill='white' width={10} height={10}>
+                <use href={sprite + `#icon-arrow-up2`} />
+              </svg>
+            </span>
+          </TableHeaderStyled>
+          <TableHeaderStyled>
+            Country
+            <span onClick={handleSortClick} data-name='country'>
+              <svg fill='white' width={10} height={10}>
+                <use href={sprite + `#icon-arrow-up2`} />
+              </svg>
+            </span>
+          </TableHeaderStyled>
+          <TableHeaderStyled>
+            Total Confirmed
+            <span onClick={handleSortClick} data-name='total'>
+              <svg fill='white' width={10} height={10}>
+                <use href={sprite + `#icon-arrow-up2`} />
+              </svg>
+            </span>
+          </TableHeaderStyled>
         </TableRowStyled>
       </thead>
       <tbody>
-        {countriesInfo.map(
+        {sortedCountryData.map(
           ({ CountryCode, TotalConfirmed, Country }, index) => (
             <TableRowStyled
               key={CountryCode}

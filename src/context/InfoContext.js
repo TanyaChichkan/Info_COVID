@@ -8,9 +8,6 @@ export const InfoProvider = ({ children }) => {
   const [countriesData, setCountriesData] = useState([]);
   const [countryFilter, setCountryFilter] = useState('');
   const [selectedCountry, setSelectedCountry] = useState(null);
-  const [modalOpen, setModalOpen] = useState(false);
-
-  console.log(countriesDataAll);
 
   useEffect(() => {
     if (countriesDataAll?.Countries?.length) {
@@ -44,8 +41,6 @@ export const InfoProvider = ({ children }) => {
         loadingInfo,
         getSelectedCountry,
         selectedCountry,
-        modalOpen,
-        setModalOpen,
       }}
     >
       {children}
