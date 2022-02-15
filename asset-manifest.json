@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/Info_COVID/static/css/main.ada4e72c.css",
+    "main.js": "/Info_COVID/static/js/main.646d79b4.js",
+    "static/media/logo.png": "/Info_COVID/static/media/logo.05d5d99b6d241acc6875.png",
+    "static/media/deaths.svg": "/Info_COVID/static/media/deaths.842606bb896d6b913e1c71d17b6fcce5.svg",
+    "static/media/recovered.svg": "/Info_COVID/static/media/recovered.edd4f3fde8945ae1a234701d5f84985b.svg",
+    "static/media/sprite.svg": "/Info_COVID/static/media/sprite.c23bfa53ad55d9a7ca232598257b391e.svg",
+    "static/media/confirmed.svg": "/Info_COVID/static/media/confirmed.9257d4386f4611ccf4ccf048c88464a8.svg",
+    "index.html": "/Info_COVID/index.html",
+    "main.ada4e72c.css.map": "/Info_COVID/static/css/main.ada4e72c.css.map",
+    "main.646d79b4.js.map": "/Info_COVID/static/js/main.646d79b4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ada4e72c.css",
+    "static/js/main.646d79b4.js"
+  ]
+}
