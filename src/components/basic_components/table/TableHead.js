@@ -8,6 +8,7 @@ import {
 import { concatWords } from '../../../helpers/helperFns';
 import { InfoContext } from '../../../context/InfoContext';
 import sprite from '../../../images/icons/sprite.svg';
+import { device } from '../../../styles/queries';
 import { constantsText, constantsNumbers } from '../../../constants/constants';
 
 const { ascendingOrder, descendingOrder, tableHeadNodeName, iconUp, iconDown } =
@@ -18,6 +19,17 @@ const TableHeaderStyled = styled.th`
   ${stylesForTableData}
   ${stylesForHeaderAndFooter}
   ${borderRadius}
+`;
+
+const SvgStyled = styled.svg`
+  fill: white;
+  width: 10px;
+  height: 10px;
+
+  @media ${device.tablet} {
+    width: 16px;
+    height: 16px;
+  }
 `;
 
 const tableHeadingsNames = ['№', 'Country', 'Total Confirmed'];
@@ -68,7 +80,7 @@ const TableHead = () => {
       {tableHeadingsNames.map((headerItem) => {
         const dataFromArrayFormatted = concatWords(headerItem);
         return headerItem === '№' ? (
-          <TableHeaderStyled key={headerItem}>
+          <TableHeaderStyled key={headerItem} style={{ width: '60px' }}>
             {dataFromArrayFormatted}
           </TableHeaderStyled>
         ) : (
@@ -79,19 +91,19 @@ const TableHead = () => {
           >
             {headerItem}
 
-            <span>
+            <span style={{ marginLeft: '5px' }}>
               {sortedField.field === dataFromArrayFormatted &&
                 sortedField.order === descendingOrder && (
-                  <svg fill='white' width={10} height={10}>
+                  <SvgStyled fill='white' width={10} height={10}>
                     <use href={sprite + iconDown} />
-                  </svg>
+                  </SvgStyled>
                 )}
               {((sortedField.field === dataFromArrayFormatted &&
                 sortedField.order === ascendingOrder) ||
                 !sortedField.order) && (
-                <svg fill='white' width={10} height={10}>
+                <SvgStyled fill='white' width={10} height={10}>
                   <use href={sprite + iconUp} />
-                </svg>
+                </SvgStyled>
               )}
             </span>
           </TableHeaderStyled>

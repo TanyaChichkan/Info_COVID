@@ -38,6 +38,11 @@ const TableRowStyled = styled.tr`
   color: ${(props) => (props.isFromFooter ? 'white' : 'black')};
 `;
 
+const TableHeadStyled = styled.thead`
+  position: sticky;
+  top: 0;
+`;
+
 const TableFooterStyled = styled.tfoot`
   ${stylesForHeaderAndFooter}
 `;
@@ -62,11 +67,11 @@ const Table = () => {
 
   return (
     <TableStyled>
-      <thead>
+      <TableHeadStyled>
         <TableRowStyled>
           <TableHead />
         </TableRowStyled>
-      </thead>
+      </TableHeadStyled>
 
       <tbody>
         {sortedCountryData.map(

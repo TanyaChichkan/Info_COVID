@@ -5,6 +5,17 @@ import Wrapper from '../assets_components/Wrapper';
 import SearchInput from './SearchInput';
 import { device } from '../../styles/queries';
 
+const HeaderStyled = styled.header`
+  position: sticky;
+  top: 0;
+  background-color: white;
+  margin-bottom: 20px;
+
+  @media ${device.tablet} {
+    margin-bottom: 0;
+  }
+`;
+
 const HeadingStyled = styled.h1`
   font-weight: bold;
   font-size: 35px;
@@ -18,7 +29,7 @@ const HeadingStyled = styled.h1`
 
 const Header = () => {
   return (
-    <header>
+    <HeaderStyled>
       <Container isFromHeader={true}>
         <Wrapper isFromHeader={true}>
           <Logo />
@@ -26,7 +37,7 @@ const Header = () => {
         </Wrapper>
         <SearchInput />
       </Container>
-    </header>
+    </HeaderStyled>
   );
 };
 
