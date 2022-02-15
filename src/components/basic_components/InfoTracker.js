@@ -7,7 +7,7 @@ import Error from '../info_components/Error';
 import Header from '../structure_components/Header';
 import Section from '../assets_components/Section';
 import Container from '../assets_components/Container';
-import Table from './Table';
+import Table from './table/Table';
 import ModalComponent from '../assets_components/ModalComponent';
 import List from '../assets_components/List';
 

@@ -1,20 +1,26 @@
 export const constantsText = {
-  inputFirst: 'inputFirst',
-  inputSecond: 'inputSecond',
-  selectFirst: 'selectFirst',
-  selectSecond: 'selectSecond',
-  labelText: 'Choose currency',
   errorMsg: 'Something went wrong. Please, try again',
   success: 'SUCCESS',
   error: 'ERROR',
   loading: 'LOADING',
-  inputPlaceholder: 'Search...'
+  inputPlaceholder: 'Search...',
+  buttonModalText: 'OK',
+  colSpanValue: '2',
+  tableHeadNodeName: 'TH',
+  ascendingOrder: 'ascending',
+  descendingOrder: 'descending',
+  iconUp: '#icon-arrow-up',
+  iconDown: '#icon-arrow-down',
+  getInfoEndpoint: '/summary',
 };
 
 export const constantsNumbers = {
   startPageDelay: 1000,
   delay: 2000,
-  screenWidthSmall: 375,
-  screenWidthXXS: 320,
-  screenWidthBig: 768,
+  wordIndexFrom: 0,
+  wordIndexTo: 5,
+  valueToIncreaseIndex: 1,
+  sortIndicator: 1,
+  reverseSortIndicator: -1,
+  twoWordsIndicator: 1,
 };

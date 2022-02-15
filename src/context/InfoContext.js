@@ -32,6 +32,10 @@ export const InfoProvider = ({ children }) => {
     [countriesData, countryFilter]
   );
 
+  const [sortedCountryData, setSortedCountryData] = useState(
+    filteredCountriesByInput
+  );
+
   return (
     <InfoContext.Provider
       value={{
@@ -41,6 +45,8 @@ export const InfoProvider = ({ children }) => {
         loadingInfo,
         getSelectedCountry,
         selectedCountry,
+        sortedCountryData,
+        setSortedCountryData,
       }}
     >
       {children}

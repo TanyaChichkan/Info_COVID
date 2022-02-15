@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Box, Modal } from '@mui/material';
+import { constantsText } from '../../constants/constants';
 
 //styles for modal-content wrapper
 const style = {
@@ -44,7 +45,7 @@ const ModalComponent = ({ openModal, closeModal, children }) => {
         <Box sx={style}>
           {children}
           <ButtonStyled type='button' onClick={closeModal}>
-            OK
+            {constantsText.buttonModalText}
           </ButtonStyled>
         </Box>
       </Modal>

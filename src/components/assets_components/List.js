@@ -2,11 +2,19 @@ import { useContext } from 'react';
 import styled from 'styled-components';
 import { InfoContext } from '../../context/InfoContext';
 import Wrapper from './Wrapper';
-import { formatNumbersToStrings } from '../helpers/helperFns';
+import {
+  formatNumbersToStrings,
+  separateWordsByIndex,
+} from '../../helpers/helperFns';
+
+import { constantsNumbers } from '../../constants/constants';
 
 import { ReactComponent as ConfirmedSVG } from '../../images/icons/confirmed.svg';
 import { ReactComponent as DeathsSVG } from '../../images/icons/deaths.svg';
 import { ReactComponent as RecoveredSVG } from '../../images/icons/recovered.svg';
+
+//destructuring object with constants numbers
+const { wordIndexFrom, wordIndexTo } = constantsNumbers;
 
 //styles for modal content
 const HeadingStyled = styled.h3`
@@ -22,7 +30,7 @@ const SpanTextStyled = styled.span`
   line-height: 1.166;
   color: #666666;
 
-  margin-left: ${(props) => props.isText && '29px'};
+  margin-left: ${(props) => props.isText && '20px'};
 `;
 
 const ListItemStyled = styled.li`
@@ -68,7 +76,7 @@ const List = () => {
               <Wrapper>
                 <SpanTextStyled>{iconsArray[index]}</SpanTextStyled>
                 <SpanTextStyled isText={true}>
-                  {key.slice(0, 5) + ' ' + key.slice(5)}
+                  {separateWordsByIndex(key, wordIndexFrom, wordIndexTo)}
                 </SpanTextStyled>
               </Wrapper>
               <SpanTextStyled>{formatNumbersToStrings(value)}</SpanTextStyled>

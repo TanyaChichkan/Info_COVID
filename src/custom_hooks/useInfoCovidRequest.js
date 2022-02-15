@@ -35,6 +35,7 @@ export const useInfoCovidRequest = () => {
       const data = await fetchInfoByCounties();
       setCountriesDataAll(data.data);
 
+      //added  Loader component, so here this setTimeout  is for Loader component showing when the page is loaded for the 1st time, as the data is fetched from BE immediately
       setTimeout(
         () => dispatch({ type: constantsText.success }),
         constantsNumbers.startPageDelay
